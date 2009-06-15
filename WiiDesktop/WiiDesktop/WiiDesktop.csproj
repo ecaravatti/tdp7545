@@ -42,6 +42,22 @@
     <Compile Include="Domain\Calibration\CalibrationPersister.cs" />
     <Compile Include="Domain\Calibration\Calibrator.cs" />
     <Compile Include="Domain\Cursor\CursorSmoother.cs" />
+    <Compile Include="Domain\Gestures\GestureConfiguration.cs" />
+    <Compile Include="Domain\Gestures\GestureSegmentList.cs" />
+    <Compile Include="Domain\Gestures\IMouseMessageFilter.cs" />
+    <Compile Include="Domain\Gestures\ManagedMouseFilter.cs" />
+    <Compile Include="Domain\Gestures\MouseGesture.cs" />
+    <Compile Include="Domain\Gestures\MouseGestureEventArgs.cs" />
+    <Compile Include="Domain\Gestures\MouseGestures.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Domain\Gestures\MouseGestures.designer.cs">
+      <DependentUpon>MouseGestures.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\Gestures\MouseMove.cs" />
+    <Compile Include="Domain\Gestures\Util.cs" />
+    <Compile Include="Domain\Gestures\WinAPI\Messages.cs" />
+    <Compile Include="Domain\Gestures\WinAPI\MouseInputEmulation.cs" />
     <Compile Include="Domain\Handlers\EventHandler.cs" />
     <Compile Include="Domain\Handlers\Keyboard\KeyboardHandler.cs" />
     <Compile Include="Domain\Handlers\Mouse\MouseDownHandler.cs" />
@@ -60,6 +76,12 @@
     </Compile>
     <Compile Include="View\CalibrationScreen.Designer.cs">
       <DependentUpon>CalibrationScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\GesturesScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\GesturesScreen.Designer.cs">
+      <DependentUpon>GesturesScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="View\GScreen.cs">
       <SubType>Form</SubType>
@@ -86,7 +108,45 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Domain\Gestures\" />
+    <Content Include="Domain\Gestures\MouseGestures.csproj" />
+    <EmbeddedResource Include="View\GesturesScreen.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>GesturesScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Images\Down.png" />
+    <EmbeddedResource Include="View\Images\DownA.png" />
+    <EmbeddedResource Include="View\Images\DownLeft.png" />
+    <EmbeddedResource Include="View\Images\DownLeftA.png" />
+    <EmbeddedResource Include="View\Images\DownRight.png" />
+    <EmbeddedResource Include="View\Images\DownRightA.png" />
+    <EmbeddedResource Include="View\Images\DownUp.png" />
+    <EmbeddedResource Include="View\Images\DownUpA.png" />
+    <EmbeddedResource Include="View\Images\Left.png" />
+    <EmbeddedResource Include="View\Images\LeftA.png" />
+    <EmbeddedResource Include="View\Images\LeftDown.png" />
+    <EmbeddedResource Include="View\Images\LeftDownA.png" />
+    <EmbeddedResource Include="View\Images\LeftRight.png" />
+    <EmbeddedResource Include="View\Images\LeftRightA.png" />
+    <EmbeddedResource Include="View\Images\LeftUp.png" />
+    <EmbeddedResource Include="View\Images\LeftUpA.png" />
+    <EmbeddedResource Include="View\Images\Right.png" />
+    <EmbeddedResource Include="View\Images\RightA.png" />
+    <EmbeddedResource Include="View\Images\RightDown.png" />
+    <EmbeddedResource Include="View\Images\RightDownA.png" />
+    <EmbeddedResource Include="View\Images\RightLeft.png" />
+    <EmbeddedResource Include="View\Images\RightLeftA.png" />
+    <EmbeddedResource Include="View\Images\RightUp.png" />
+    <EmbeddedResource Include="View\Images\RightUpA.png" />
+    <EmbeddedResource Include="View\Images\Up.png" />
+    <EmbeddedResource Include="View\Images\UpA.png" />
+    <EmbeddedResource Include="View\Images\UpDown.png" />
+    <EmbeddedResource Include="View\Images\UpDownA.png" />
+    <EmbeddedResource Include="View\Images\UpLeft.png" />
+    <EmbeddedResource Include="View\Images\UpLeftA.png" />
+    <EmbeddedResource Include="View\Images\UpRight.png" />
+    <EmbeddedResource Include="View\Images\UpRightA.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="Domain\Handlers\Gesture\" />
   </ItemGroup>
 </Project>
