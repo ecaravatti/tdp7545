@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using WiiDesktop.Controller;
+using WiiDesktop.View;
 
 namespace WiiDesktop
 {
@@ -15,12 +16,12 @@ namespace WiiDesktop
 		{
             try
             {
-                VirtualDesktop vd = new VirtualDesktop();
-                vd.StartDesktop();
+                //VirtualDesktop vd = new VirtualDesktop();
+                //vd.StartDesktop();
 
-                //Application.EnableVisualStyles();
-                //Application.SetCompatibleTextRenderingDefault(false);
-                //Application.Run(new Form1());
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new MainScreen());
             }
             catch(Exception x)
             {
