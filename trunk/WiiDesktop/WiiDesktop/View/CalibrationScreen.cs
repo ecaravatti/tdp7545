@@ -14,11 +14,15 @@ namespace WiiDesktop.View
 {
     public partial class CalibrationScreen : Form, Observer
     {
+        private VirtualDesktop model;
         private Bitmap bCalibration;
         private Graphics gCalibration;
 
-        public CalibrationScreen()
+        public CalibrationScreen(VirtualDesktop model)
         {
+            this.model = model;
+            this.model.AddObserver(this);
+
             Rectangle rect = new Rectangle();
             rect = Screen.GetWorkingArea(this);
 
@@ -35,7 +39,7 @@ namespace WiiDesktop.View
             pbCalibration.Top = 0;
             pbCalibration.Size = new Size(rect.Width, rect.Height);
             
-            WiiDesktop.Common.Point startingPoint = VirtualDesktop.GetInstance().Calibrate(this);
+            WiiDesktop.Common.Point startingPoint = model.StartCalibration();
             DrawCalibrationPoint(startingPoint.GetX(), startingPoint.GetY(), gCalibration);
             BeginInvoke((MethodInvoker)delegate() { pbCalibration.Image = bCalibration; });
             
@@ -43,15 +47,15 @@ namespace WiiDesktop.View
 
         public void Update(object subject)
         {
-            if (VirtualDesktop.GetInstance().GetIsCalibrated())
+            if (model.IsCalibrated())
             {
-                ((Subject)subject).RemoveObserver(this);
+                model.RemoveObserver(this);
                 this.Dispose();
             }
             else
             {
                 gCalibration.Clear(Color.White);
-                DrawCalibrationPoint(((Calibrator)subject).GetX(), ((Calibrator)subject).GetY(), gCalibration);
+                DrawCalibrationPoint(model.GetX(), model.GetY(), gCalibration);
                 BeginInvoke((MethodInvoker)delegate() { pbCalibration.Image = bCalibration; });
             }
         }
@@ -60,6 +64,8 @@ namespace WiiDesktop.View
         {
             if ((int)(byte)e.KeyCode == (int)Keys.Escape)
             {
+                model.StopCalibration();
+                model.RemoveObserver(this);
                 this.Dispose(); // Esc was pressed
             }
         }

@@ -11,14 +11,17 @@ namespace WiiDesktop.View
 {
     public partial class MainScreen : Form
     {
-        public MainScreen()
+        private VirtualDesktop model;
+
+        public MainScreen(VirtualDesktop model)
         {
+            this.model = model;
             InitializeComponent();
         }
 
         private void loadCalibration_Click(object sender, EventArgs e)
         {
-            if (!VirtualDesktop.GetInstance().LoadCalibration())
+            if (!model.LoadCalibration())
             {
                 MessageBox.Show(ErrorMessages.CALIBRATION_FILE_NOT_FOUND, "Calibración", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -26,7 +29,7 @@ namespace WiiDesktop.View
 
         private void calibrate_Click(object sender, EventArgs e)
         {
-            (new CalibrationScreen()).Show();
+            (new CalibrationScreen(model)).Show();
         }
     }
 }

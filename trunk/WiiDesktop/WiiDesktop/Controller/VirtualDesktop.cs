@@ -11,51 +11,48 @@ using WiiDesktop.Common;
 
 namespace WiiDesktop.Controller
 {
-    class VirtualDesktop
+    public class VirtualDesktop : Subject
     {
-        private Mutex mx;
         private bool isCalibrated;
+        private bool wasCalibrated;
+        private bool calibrating;
         private int screenWidth;
         private int screenHeight;
+        private Mutex mx;
         private Wiimote wiimote;
         private WiimoteController controller;
         private Calibrator calibrator;
 
-        private static VirtualDesktop instance;
-
-        private VirtualDesktop()
+        public VirtualDesktop()
         {
             isCalibrated = false;
+            wasCalibrated = false;
+            calibrating = false;
             screenWidth = Screen.PrimaryScreen.Bounds.Width;
             screenHeight = Screen.PrimaryScreen.Bounds.Height;
 
             mx = new Mutex();
-
-            //TODO Obtener width y height
             controller = new WiimoteController(screenWidth, screenHeight);
-            
+            calibrator = new Calibrator(screenWidth, screenHeight);
 
             wiimote = new Wiimote();
             wiimote.WiimoteChanged += new WiimoteChangedEventHandler(OnWiimoteChanged);
         }
 
-        static public VirtualDesktop GetInstance()
+        public Point StartCalibration()
         {
-            if (instance == null)
-                instance = new VirtualDesktop();
-
-            return instance;
-        }
-
-        public Point Calibrate(Observer observer)
-        {
-            calibrator = new Calibrator(screenWidth, screenHeight);
-            calibrator.AddObserver(observer);
-
-            StartDesktop();
-
+            //Guardo el último estado de la calibración
+            wasCalibrated = isCalibrated;
+            calibrating = true;
             //TODO Cambiar en toda la aplicación los (x,y) por Point!!
             return new Point(calibrator.GetX(), calibrator.GetY());
+        }
+
+        public void StopCalibration()
+        {
+            calibrating = false;
+            //Restauro el estado que tenía antes de empezar la calibración
+            isCalibrated = wasCalibrated;
         }
 
         public Boolean LoadCalibration()
@@ -67,7 +64,7 @@ namespace WiiDesktop.Controller
                 isCalibrated = true;
                 return true;
             }
-            catch (CalibrationDataNotFoundException e)
+            catch (CalibrationDataNotFoundException)
             {
                 return false;
             }
@@ -87,6 +84,21 @@ namespace WiiDesktop.Controller
             }
         }
 
+        public bool IsCalibrated()
+        {
+            return isCalibrated;
+        }
+
+        public float GetX()
+        {
+            return calibrator.GetX();
+        }
+
+        public float GetY()
+        {
+            return calibrator.GetY();
+        }
+
         private void OnWiimoteChanged(object sender, WiimoteChangedEventArgs args)
         {
             mx.WaitOne();
@@ -97,23 +109,19 @@ namespace WiiDesktop.Controller
                 {
                     controller.StartHandling(args.WiimoteState);
                 }
-                else
+                else if (calibrating)
                 {
                     isCalibrated = calibrator.Calibrate(args.WiimoteState);
+                    Notify();
                 }
 
             }
-            catch (UserTerminatedException e)
+            catch (UserTerminatedException)
             {
                 wiimote.Disconnect();
             }
 
             mx.ReleaseMutex();
-        }
-
-        public bool GetIsCalibrated()
-        {
-            return isCalibrated;
         }
 
     }
