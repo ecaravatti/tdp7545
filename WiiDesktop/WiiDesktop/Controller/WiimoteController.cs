@@ -9,7 +9,7 @@ using WiiDesktop.Exceptions;
 
 namespace WiiDesktop.Controller
 {
-    class WiimoteController
+    public class WiimoteController
     {
         private WiimoteState lastState;
         private EventHandler eventHandler;

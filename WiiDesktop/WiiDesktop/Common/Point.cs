@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WiiDesktop.Common
 {
-    class Point
+    public class Point
     {
         private float x;
         private float y;

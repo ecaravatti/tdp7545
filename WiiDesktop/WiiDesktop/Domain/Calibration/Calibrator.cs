@@ -9,7 +9,7 @@ using WiiDesktop.Controller;
 
 namespace WiiDesktop.Domain.Calibration
 {
-    class Calibrator : Subject
+    class Calibrator
     {
         private CalibrationData data;
         private WiimoteState lastState;
@@ -35,13 +35,10 @@ namespace WiiDesktop.Domain.Calibration
             {
                 data.addPoint(currentState.IRState.RawX1, currentState.IRState.RawY1);
                 Console.WriteLine("Punto " + (pointsAdded + 1) + " calibrado");
-                Notify();
 
                 if (++pointsAdded >= CalibrationData.CALIBRATION_POINTS)
                 {
                     this.Calibrate(data);
-                    //FIXME El Notify() se tiene que llamar después de llamar a este método!!
-                    Notify();
                     return true;
                 }               
             }

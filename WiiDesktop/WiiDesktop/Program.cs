@@ -16,12 +16,12 @@ namespace WiiDesktop
 		{
             try
             {
-                //VirtualDesktop vd = new VirtualDesktop();
+                VirtualDesktop model = new VirtualDesktop();
                 //vd.StartDesktop();
 
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new MainScreen());
+                Application.Run(new MainScreen(model));
             }
             catch(Exception x)
             {
