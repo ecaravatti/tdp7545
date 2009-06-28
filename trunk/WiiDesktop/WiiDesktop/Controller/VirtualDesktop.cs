@@ -44,15 +44,20 @@ namespace WiiDesktop.Controller
             //Guardo el último estado de la calibración
             wasCalibrated = isCalibrated;
             calibrating = true;
-            //TODO Cambiar en toda la aplicación los (x,y) por Point!!
             return new Point(calibrator.GetX(), calibrator.GetY());
         }
 
+        //Este método debe llamarse sólo si el proceso de calibración es cancelado
         public void StopCalibration()
         {
+            mx.WaitOne();
+
+            //Se detiene el proceso de calibración
             calibrating = false;
-            //Restauro el estado que tenía antes de empezar la calibración
+            //Se restaura el estado que tenía antes de empezar la calibración
             isCalibrated = wasCalibrated;
+
+            mx.ReleaseMutex();
         }
 
         public Boolean LoadCalibration()
@@ -112,6 +117,7 @@ namespace WiiDesktop.Controller
                 else if (calibrating)
                 {
                     isCalibrated = calibrator.Calibrate(args.WiimoteState);
+                    calibrating = !isCalibrated;
                     Notify();
                 }
 
