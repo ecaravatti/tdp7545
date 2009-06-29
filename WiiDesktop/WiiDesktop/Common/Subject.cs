@@ -1,12 +1,14 @@
 using System;
 using System.Text;
 using System.Collections;
+using System.Threading;
 
 namespace WiiDesktop.Common
 {
     public abstract class Subject
     {
         private ArrayList observers = new ArrayList();
+        private ArrayList pendingToRemove = new ArrayList();
 
         public void AddObserver(Observer observer)
         {
@@ -15,11 +17,16 @@ namespace WiiDesktop.Common
 
         public void RemoveObserver(Observer observer)
         {
-            observers.Remove(observer);
+            pendingToRemove.Add(observer);
         }
 
         public void Notify()
         {
+            foreach (Observer observer in pendingToRemove)
+            {
+                observers.Remove(observer);
+            }
+
             foreach (Observer observer in observers)
             {
                 observer.Update(this);

@@ -33,7 +33,6 @@ namespace WiiDesktop.Controller
 
             mx = new Mutex();
             controller = new WiimoteController(screenWidth, screenHeight);
-            calibrator = new Calibrator(screenWidth, screenHeight);
 
             wiimote = new Wiimote();
             wiimote.WiimoteChanged += new WiimoteChangedEventHandler(OnWiimoteChanged);
@@ -41,8 +40,10 @@ namespace WiiDesktop.Controller
 
         public Point StartCalibration()
         {
+            calibrator = new Calibrator(screenWidth, screenHeight);
             //Guardo el último estado de la calibración
             wasCalibrated = isCalibrated;
+            isCalibrated = false;
             calibrating = true;
             return new Point(calibrator.GetX(), calibrator.GetY());
         }
@@ -118,7 +119,7 @@ namespace WiiDesktop.Controller
                 {
                     isCalibrated = calibrator.Calibrate(args.WiimoteState);
                     calibrating = !isCalibrated;
-                    Notify();
+                    if (calibrator.HasChanged()) Notify();
                 }
 
             }

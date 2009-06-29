@@ -16,6 +16,7 @@ namespace WiiDesktop.Domain.Calibration
         private int screenWidth;
         private int screenHeight;
         private int pointsAdded;
+        private bool hasChanged;
 
         private const float CALIBRATION_MARGIN = .1f;
     
@@ -25,6 +26,7 @@ namespace WiiDesktop.Domain.Calibration
             lastState = new WiimoteState();
 
             pointsAdded = 0;
+            hasChanged = false;
             this.screenHeight = screenHeight;
             this.screenWidth = screenWidth;
         }
@@ -34,13 +36,18 @@ namespace WiiDesktop.Domain.Calibration
             if (currentState.IRState.Found1 && !lastState.IRState.Found1)
             {
                 data.addPoint(currentState.IRState.RawX1, currentState.IRState.RawY1);
+                hasChanged = true;
                 Console.WriteLine("Punto " + (pointsAdded + 1) + " calibrado");
 
                 if (++pointsAdded >= CalibrationData.CALIBRATION_POINTS)
                 {
                     this.Calibrate(data);
                     return true;
-                }               
+                }
+            }
+            else
+            {
+                hasChanged = false;
             }
 
             lastState.IRState.Found1 = currentState.IRState.Found1;
@@ -65,6 +72,11 @@ namespace WiiDesktop.Domain.Calibration
         public float GetY()
         {
             return GetY(pointsAdded);
+        }
+
+        public bool HasChanged()
+        {
+            return hasChanged;
         }
 
         private CalibrationData LoadDestinationData()
