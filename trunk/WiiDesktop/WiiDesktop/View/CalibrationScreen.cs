@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
+using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 using WiiDesktop.Common;
 using System.Drawing.Imaging;
@@ -17,6 +19,7 @@ namespace WiiDesktop.View
         private VirtualDesktop model;
         private Bitmap bCalibration;
         private Graphics gCalibration;
+        private static int CALIBRATION_POINT_SIZE = 96; //Tamaño en pixeles
 
         public CalibrationScreen(VirtualDesktop model)
         {
@@ -72,8 +75,14 @@ namespace WiiDesktop.View
 
         private void DrawCalibrationPoint(float x, float y, Graphics g)
         {
-            g.DrawEllipse(new Pen(Color.Blue), x - 25, y - 25, 50, 50);
-            g.DrawEllipse(new Pen(Color.Blue), x - 5, y - 5, 10, 10);
+            Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(getResourceName());
+            g.DrawImage(Image.FromStream(stream), x - CALIBRATION_POINT_SIZE/2, y - CALIBRATION_POINT_SIZE/2,
+                                         CALIBRATION_POINT_SIZE, CALIBRATION_POINT_SIZE);
+        }
+
+        private string getResourceName()
+        {
+            return "WiiDesktop.Resources.Images.Point-" + CALIBRATION_POINT_SIZE.ToString() + ".png";
         }
     }
 }

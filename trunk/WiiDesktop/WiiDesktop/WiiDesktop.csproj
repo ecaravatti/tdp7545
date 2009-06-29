@@ -57,6 +57,11 @@
     <Compile Include="Exceptions\ConnectionFailedException.cs" />
     <Compile Include="Exceptions\UserTerminatedException.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="View\CalibrationScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,6 +94,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\CalibrationScreen.resx">
       <SubType>Designer</SubType>
       <DependentUpon>CalibrationScreen.cs</DependentUpon>
@@ -97,6 +107,43 @@
       <SubType>Designer</SubType>
       <DependentUpon>MainScreen.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Images\Down.png" />
+    <Content Include="Resources\Images\DownA.png" />
+    <Content Include="Resources\Images\DownLeft.png" />
+    <Content Include="Resources\Images\DownLeftA.png" />
+    <Content Include="Resources\Images\DownRight.png" />
+    <Content Include="Resources\Images\DownRightA.png" />
+    <Content Include="Resources\Images\DownUp.png" />
+    <Content Include="Resources\Images\DownUpA.png" />
+    <Content Include="Resources\Images\Left.png" />
+    <Content Include="Resources\Images\LeftA.png" />
+    <Content Include="Resources\Images\LeftDown.png" />
+    <Content Include="Resources\Images\LeftDownA.png" />
+    <Content Include="Resources\Images\LeftRight.png" />
+    <Content Include="Resources\Images\LeftRightA.png" />
+    <Content Include="Resources\Images\LeftUp.png" />
+    <Content Include="Resources\Images\LeftUpA.png" />
+    <EmbeddedResource Include="Resources\Images\Point-128.png" />
+    <EmbeddedResource Include="Resources\Images\Point-64.png" />
+    <EmbeddedResource Include="Resources\Images\Point-96.png" />
+    <Content Include="Resources\Images\Right.png" />
+    <Content Include="Resources\Images\RightA.png" />
+    <Content Include="Resources\Images\RightDown.png" />
+    <Content Include="Resources\Images\RightDownA.png" />
+    <Content Include="Resources\Images\RightLeft.png" />
+    <Content Include="Resources\Images\RightLeftA.png" />
+    <Content Include="Resources\Images\RightUp.png" />
+    <Content Include="Resources\Images\RightUpA.png" />
+    <Content Include="Resources\Images\Up.png" />
+    <Content Include="Resources\Images\UpA.png" />
+    <Content Include="Resources\Images\UpDown.png" />
+    <Content Include="Resources\Images\UpDownA.png" />
+    <Content Include="Resources\Images\UpLeft.png" />
+    <Content Include="Resources\Images\UpLeftA.png" />
+    <Content Include="Resources\Images\UpRight.png" />
+    <Content Include="Resources\Images\UpRightA.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Domain\Gestures\" />
