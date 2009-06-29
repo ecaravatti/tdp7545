@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using WiiDesktop.Controller;
 using WiiDesktop.View;
+using WiiDesktop.Exceptions;
 
 namespace WiiDesktop
 {
@@ -14,18 +15,26 @@ namespace WiiDesktop
 		[STAThread]
 		static void Main()
 		{
-            try
-            {
-                VirtualDesktop model = new VirtualDesktop();
-                //vd.StartDesktop();
+            bool retry = true;
 
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new MainScreen(model));
-            }
-            catch(Exception x)
+            while (retry)
             {
-                Console.WriteLine("Exception: " + x.Message);
+                try
+                {
+                    VirtualDesktop model = new VirtualDesktop();
+                    model.StartDesktop();
+                    retry = false;
+                    Application.EnableVisualStyles();
+                    Application.SetCompatibleTextRenderingDefault(false);
+                    Application.Run(new MainScreen(model));
+                }
+                catch (UserTerminatedException)
+                {
+                    DialogResult result = MessageBox.Show(ErrorMessages.WIIMOTE_NOT_FOUND + "\n" + ErrorMessages.PLEASE_CONNECT_WIIMOTE,
+                                                          "Wiimote no detectado", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
+
+                    retry = result.Equals(DialogResult.Retry);
+                }
             }
 		}
 	}
