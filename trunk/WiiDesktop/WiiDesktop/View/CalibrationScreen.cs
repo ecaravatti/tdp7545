@@ -53,7 +53,7 @@ namespace WiiDesktop.View
             if (model.IsCalibrated())
             {
                 model.RemoveObserver(this);
-                this.Dispose();
+                BeginInvoke((MethodInvoker)delegate() { this.Dispose(); });
             }
             else
             {
