@@ -92,7 +92,7 @@ namespace WiiDesktop.View
                 active = "A";
 
             string gestureName = Enum.GetName(typeof(MouseGesture), (MouseGesture)mg);
-            string returnValue = "WiiDesktop.View.Images." + gestureName + active + ".png";
+            string returnValue = "WiiDesktop.Resources.Images." + gestureName + active + ".png";
             return returnValue;
         }
 
@@ -130,7 +130,14 @@ namespace WiiDesktop.View
 
         }
 
-      
+        private void label19_Click(object sender, EventArgs e)
+        {
 
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
