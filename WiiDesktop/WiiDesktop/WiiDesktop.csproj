@@ -44,6 +44,23 @@
     <Compile Include="Common\Observer.cs" />
     <Compile Include="Common\Subject.cs" />
     <Compile Include="Domain\Cursor\CursorSmoother.cs" />
+    <Compile Include="Domain\Gestures\ApplicationsFinder.cs" />
+    <Compile Include="Domain\Gestures\GestureConfiguration.cs" />
+    <Compile Include="Domain\Gestures\GestureSegmentList.cs" />
+    <Compile Include="Domain\Gestures\IMouseMessageFilter.cs" />
+    <Compile Include="Domain\Gestures\ManagedMouseFilter.cs" />
+    <Compile Include="Domain\Gestures\MouseGesture.cs" />
+    <Compile Include="Domain\Gestures\MouseGestureEventArgs.cs" />
+    <Compile Include="Domain\Gestures\MouseGestures.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Domain\Gestures\MouseGestures.designer.cs">
+      <DependentUpon>MouseGestures.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\Gestures\MouseMove.cs" />
+    <Compile Include="Domain\Gestures\Util.cs" />
+    <Compile Include="Domain\Gestures\WinAPI\Messages.cs" />
+    <Compile Include="Domain\Gestures\WinAPI\MouseInputEmulation.cs" />
     <Compile Include="Domain\Handlers\EventHandler.cs" />
     <Compile Include="Domain\Handlers\Keyboard\KeyboardHandler.cs" />
     <Compile Include="Domain\Handlers\Mouse\MouseDownHandler.cs" />
@@ -53,14 +70,13 @@
     <Compile Include="Common\Point.cs" />
     <Compile Include="Domain\Cursor\CursorWarper.cs" />
     <Compile Include="Controller\VirtualDesktop.cs" />
+    <Compile Include="Domain\Point.cs" />
     <Compile Include="Exceptions\CalibrationDataNotFoundException.cs" />
     <Compile Include="Exceptions\ConnectionFailedException.cs" />
     <Compile Include="Exceptions\UserTerminatedException.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
+    <Compile Include="View\ApplicationsComboBox.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="View\CalibrationScreen.cs">
       <SubType>Form</SubType>
@@ -69,6 +85,12 @@
       <DependentUpon>CalibrationScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="View\ErrorMessages.cs" />
+    <Compile Include="View\GesturesScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\GesturesScreen.Designer.cs">
+      <DependentUpon>GesturesScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\GScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,6 +108,10 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Management, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\System.Management.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="WiimoteLib, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
@@ -94,14 +120,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <SubType>Designer</SubType>
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="View\CalibrationScreen.resx">
       <SubType>Designer</SubType>
       <DependentUpon>CalibrationScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\GesturesScreen.resx">
+      <DependentUpon>GesturesScreen.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="View\MainScreen.resx">
       <SubType>Designer</SubType>
@@ -109,44 +134,45 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Images\Down.png" />
-    <Content Include="Resources\Images\DownA.png" />
-    <Content Include="Resources\Images\DownLeft.png" />
-    <Content Include="Resources\Images\DownLeftA.png" />
-    <Content Include="Resources\Images\DownRight.png" />
-    <Content Include="Resources\Images\DownRightA.png" />
-    <Content Include="Resources\Images\DownUp.png" />
-    <Content Include="Resources\Images\DownUpA.png" />
-    <Content Include="Resources\Images\Left.png" />
-    <Content Include="Resources\Images\LeftA.png" />
-    <Content Include="Resources\Images\LeftDown.png" />
-    <Content Include="Resources\Images\LeftDownA.png" />
-    <Content Include="Resources\Images\LeftRight.png" />
-    <Content Include="Resources\Images\LeftRightA.png" />
-    <Content Include="Resources\Images\LeftUp.png" />
-    <Content Include="Resources\Images\LeftUpA.png" />
+    <Content Include="Domain\Gestures\MouseGestures.csproj" />
+    <Content Include="libs\WiimoteLib.dll" />
+    <EmbeddedResource Include="Resources\Images\Down.png" />
+    <EmbeddedResource Include="Resources\Images\DownA.png" />
+    <EmbeddedResource Include="Resources\Images\DownLeft.png" />
+    <EmbeddedResource Include="Resources\Images\DownLeftA.png" />
+    <EmbeddedResource Include="Resources\Images\DownRight.png" />
+    <EmbeddedResource Include="Resources\Images\DownRightA.png" />
+    <EmbeddedResource Include="Resources\Images\DownUp.png" />
+    <EmbeddedResource Include="Resources\Images\DownUpA.png" />
+    <EmbeddedResource Include="Resources\Images\Left.png" />
+    <EmbeddedResource Include="Resources\Images\LeftA.png" />
+    <EmbeddedResource Include="Resources\Images\LeftDown.png" />
+    <EmbeddedResource Include="Resources\Images\LeftDownA.png" />
+    <EmbeddedResource Include="Resources\Images\LeftRight.png" />
+    <EmbeddedResource Include="Resources\Images\LeftRightA.png" />
+    <EmbeddedResource Include="Resources\Images\LeftUp.png" />
+    <EmbeddedResource Include="Resources\Images\LeftUpA.png" />
     <EmbeddedResource Include="Resources\Images\Point-128.png" />
     <EmbeddedResource Include="Resources\Images\Point-64.png" />
     <EmbeddedResource Include="Resources\Images\Point-96.png" />
-    <Content Include="Resources\Images\Right.png" />
-    <Content Include="Resources\Images\RightA.png" />
-    <Content Include="Resources\Images\RightDown.png" />
-    <Content Include="Resources\Images\RightDownA.png" />
-    <Content Include="Resources\Images\RightLeft.png" />
-    <Content Include="Resources\Images\RightLeftA.png" />
-    <Content Include="Resources\Images\RightUp.png" />
-    <Content Include="Resources\Images\RightUpA.png" />
-    <Content Include="Resources\Images\Up.png" />
-    <Content Include="Resources\Images\UpA.png" />
-    <Content Include="Resources\Images\UpDown.png" />
-    <Content Include="Resources\Images\UpDownA.png" />
-    <Content Include="Resources\Images\UpLeft.png" />
-    <Content Include="Resources\Images\UpLeftA.png" />
-    <Content Include="Resources\Images\UpRight.png" />
-    <Content Include="Resources\Images\UpRightA.png" />
+    <EmbeddedResource Include="Resources\Images\Right.png" />
+    <EmbeddedResource Include="Resources\Images\RightA.png" />
+    <EmbeddedResource Include="Resources\Images\RightDown.png" />
+    <EmbeddedResource Include="Resources\Images\RightDownA.png" />
+    <EmbeddedResource Include="Resources\Images\RightLeft.png" />
+    <EmbeddedResource Include="Resources\Images\RightLeftA.png" />
+    <EmbeddedResource Include="Resources\Images\RightUp.png" />
+    <EmbeddedResource Include="Resources\Images\RightUpA.png" />
+    <EmbeddedResource Include="Resources\Images\Up.png" />
+    <EmbeddedResource Include="Resources\Images\UpA.png" />
+    <EmbeddedResource Include="Resources\Images\UpDown.png" />
+    <EmbeddedResource Include="Resources\Images\UpDownA.png" />
+    <EmbeddedResource Include="Resources\Images\UpLeft.png" />
+    <EmbeddedResource Include="Resources\Images\UpLeftA.png" />
+    <EmbeddedResource Include="Resources\Images\UpRight.png" />
+    <EmbeddedResource Include="Resources\Images\UpRightA.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Domain\Gestures\" />
     <Folder Include="Domain\Handlers\Gesture\" />
   </ItemGroup>
 </Project>

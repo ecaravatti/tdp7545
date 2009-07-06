@@ -32,6 +32,19 @@ namespace WiiDesktop.Domain.Gestures
 
             return command;
         }
+
+        public void UpdateCommand(MouseGesture gesture, String application) 
+        {
+            try
+            {
+                configMap.Add(gesture, application);
+            }
+            catch (ArgumentException e)
+            {
+                configMap.Remove(gesture);
+                configMap.Add(gesture, application);
+            }
+        }
         
     }
 }
