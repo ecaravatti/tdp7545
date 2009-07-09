@@ -39,7 +39,7 @@ namespace WiiDesktop.Domain.Gestures
             {
                 configMap.Add(gesture, application);
             }
-            catch (ArgumentException e)
+            catch (ArgumentException)
             {
                 configMap.Remove(gesture);
                 configMap.Add(gesture, application);

@@ -12,11 +12,17 @@ namespace WiiDesktop.View
     public partial class MainScreen : Form
     {
         private VirtualDesktop model;
+        private Timer batteryTimer;
 
         public MainScreen(VirtualDesktop model)
         {
             this.model = model;
+            this.batteryTimer = new Timer();
             InitializeComponent();
+            SetBatteryCharge();
+            batteryTimer.Interval = 1000*60*5; //5 min
+            batteryTimer.Tick += new EventHandler(Timer_Tick);
+            batteryTimer.Start();
         }
 
         private void loadCalibration_Click(object sender, EventArgs e)
@@ -31,5 +37,27 @@ namespace WiiDesktop.View
         {
             (new CalibrationScreen(model)).Show();
         }
+
+        private void MainScreen_FormClosed(object sender, EventArgs e)
+        {
+            batteryTimer.Stop();
+            model.StopDesktop();
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            if (sender == batteryTimer)
+            {
+                SetBatteryCharge();
+            }
+        }
+
+        private void SetBatteryCharge()
+        {
+            int batteryCharge = model.GetBatteryCharge();
+            wiimoteBatteryBar.Value = batteryCharge;
+            wiimoteBatteryLabel.Text = batteryCharge.ToString() + "%";
+        }
+        
     }
 }
