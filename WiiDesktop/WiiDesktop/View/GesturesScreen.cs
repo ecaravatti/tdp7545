@@ -104,7 +104,7 @@ namespace WiiDesktop.View
                 process.StartInfo.FileName = GestureConfiguration.Instance.ResolveCommand(e.Gesture);
                 process.Start();
             }
-            catch (Exception ex) {
+            catch (Exception) {
                 // No hay comando configurado para el gesto detectado
             }
             foreach (PictureBox pb in mouseGestureDisplay)

@@ -37,7 +37,6 @@ namespace WiiDesktop.Domain.Calibration
             {
                 data.addPoint(currentState.IRState.RawX1, currentState.IRState.RawY1);
                 hasChanged = true;
-                Console.WriteLine("Punto " + (pointsAdded + 1) + " calibrado");
 
                 if (++pointsAdded >= CalibrationData.CALIBRATION_POINTS)
                 {
@@ -72,6 +71,11 @@ namespace WiiDesktop.Domain.Calibration
         public float GetY()
         {
             return GetY(pointsAdded);
+        }
+
+        public CalibrationData GetCalibrationData()
+        {
+            return data;
         }
 
         public bool HasChanged()

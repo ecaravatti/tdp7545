@@ -66,6 +66,10 @@ namespace WiiDesktop.Controller
             try
             {
                 CalibrationData data = CalibrationPersister.LoadCalibrationData();
+                if (calibrator == null)
+                {
+                    calibrator = new Calibrator(screenWidth, screenHeight);
+                }
                 calibrator.Calibrate(data);
                 isCalibrated = true;
                 return true;
@@ -90,6 +94,17 @@ namespace WiiDesktop.Controller
             }
         }
 
+        public void StopDesktop()
+        {
+            if (IsCalibrated())
+            {
+                CalibrationPersister.SaveCalibrationData(calibrator.GetCalibrationData());
+            }
+            wiimote.SetReportType(Wiimote.InputReport.IRAccel, false);
+            wiimote.SetLEDs(false, false, false, false);
+            wiimote.Disconnect();
+        }
+
         public bool IsCalibrated()
         {
             return isCalibrated;
@@ -103,6 +118,11 @@ namespace WiiDesktop.Controller
         public float GetY()
         {
             return calibrator.GetY();
+        }
+
+        public int GetBatteryCharge()
+        {
+            return (int)wiimote.WiimoteState.Battery / 2;
         }
 
         private void OnWiimoteChanged(object sender, WiimoteChangedEventArgs args)
