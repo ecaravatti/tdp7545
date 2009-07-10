@@ -31,6 +31,10 @@ namespace WiiDesktop.View
             {
                 MessageBox.Show(ErrorMessages.CALIBRATION_FILE_NOT_FOUND, "Calibración", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            else
+            {
+                MessageBox.Show(ErrorMessages.CALIBRATION_LOADED, "Calibración", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void calibrate_Click(object sender, EventArgs e)
@@ -38,7 +42,7 @@ namespace WiiDesktop.View
             (new CalibrationScreen(model)).Show();
         }
 
-        private void MainScreen_FormClosed(object sender, EventArgs e)
+        private void MainScreen_FormClosing(object sender, EventArgs e)
         {
             batteryTimer.Stop();
             model.StopDesktop();
