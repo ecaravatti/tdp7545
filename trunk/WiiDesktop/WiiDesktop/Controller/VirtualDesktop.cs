@@ -22,6 +22,9 @@ namespace WiiDesktop.Controller
         private Wiimote wiimote;
         private WiimoteController controller;
         private Calibrator calibrator;
+        //Almacena la última información de calibración creada durante
+        //la ejecución de la aplicación.
+        private CalibrationData lastCalibrationData;
 
         public VirtualDesktop()
         {
@@ -96,9 +99,9 @@ namespace WiiDesktop.Controller
 
         public void StopDesktop()
         {
-            if (IsCalibrated())
+            if (IsCalibrated() && (lastCalibrationData != null))
             {
-                CalibrationPersister.SaveCalibrationData(calibrator.GetCalibrationData());
+                CalibrationPersister.SaveCalibrationData(lastCalibrationData);
             }
             wiimote.SetReportType(Wiimote.InputReport.IRAccel, false);
             wiimote.SetLEDs(false, false, false, false);
@@ -139,7 +142,14 @@ namespace WiiDesktop.Controller
                 {
                     isCalibrated = calibrator.Calibrate(args.WiimoteState);
                     calibrating = !isCalibrated;
-                    if (calibrator.HasChanged()) Notify();
+                    if (isCalibrated)
+                    {
+                        lastCalibrationData = calibrator.GetCalibrationData();
+                    }
+                    if (calibrator.HasChanged())
+                    {
+                        Notify();
+                    }
                 }
 
             }
