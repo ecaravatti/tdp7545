@@ -33,15 +33,22 @@ namespace WiiDesktop.View
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GesturesScreen));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.comboBox9 = new System.Windows.Forms.ComboBox();
-            this.comboBox8 = new System.Windows.Forms.ComboBox();
-            this.comboBox7 = new System.Windows.Forms.ComboBox();
-            this.comboBox6 = new System.Windows.Forms.ComboBox();
-            this.comboBox5 = new System.Windows.Forms.ComboBox();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.comboBox23 = new ApplicationsComboBox(MouseGesture.RightLeft);
+            this.comboBox22 = new ApplicationsComboBox(MouseGesture.RightDown);
+            this.comboBox21 = new ApplicationsComboBox(MouseGesture.RightUp);
+            this.comboBox20 = new ApplicationsComboBox(MouseGesture.UpLeft);
+            this.comboBox19 = new ApplicationsComboBox(MouseGesture.UpDown);
+            this.comboBox18 = new ApplicationsComboBox(MouseGesture.UpRight);
+            this.comboBox17 = new ApplicationsComboBox(MouseGesture.Left);
+            this.comboBox9 = new ApplicationsComboBox(MouseGesture.Up);
+            this.comboBox7 = new ApplicationsComboBox(MouseGesture.LeftRight);
+            this.comboBox6 = new ApplicationsComboBox(MouseGesture.LeftUp);
+            this.comboBox5 = new ApplicationsComboBox(MouseGesture.DownLeft);
+            this.comboBox4 = new ApplicationsComboBox(MouseGesture.DownRight);
+            this.comboBox3 = new ApplicationsComboBox(MouseGesture.DownUp);
+            this.comboBox2 = new ApplicationsComboBox(MouseGesture.Right);
             this.comboBox1 = new ApplicationsComboBox(MouseGesture.Down);
+            
             this.pbRight = new System.Windows.Forms.PictureBox();
             this.pbDown = new System.Windows.Forms.PictureBox();
             this.pbLeft = new System.Windows.Forms.PictureBox();
@@ -60,6 +67,7 @@ namespace WiiDesktop.View
             this.pbUpRight = new System.Windows.Forms.PictureBox();
             this.mouseGesturesTest = new MouseGestures.MouseGestures(this.components);
             this.timerReset = new System.Windows.Forms.Timer(this.components);
+            this.comboBox8 = new ApplicationsComboBox(MouseGesture.LeftDown);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbRight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbDown)).BeginInit();
@@ -81,8 +89,15 @@ namespace WiiDesktop.View
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.comboBox9);
             this.groupBox1.Controls.Add(this.comboBox8);
+            this.groupBox1.Controls.Add(this.comboBox23);
+            this.groupBox1.Controls.Add(this.comboBox22);
+            this.groupBox1.Controls.Add(this.comboBox21);
+            this.groupBox1.Controls.Add(this.comboBox20);
+            this.groupBox1.Controls.Add(this.comboBox19);
+            this.groupBox1.Controls.Add(this.comboBox18);
+            this.groupBox1.Controls.Add(this.comboBox17);
+            this.groupBox1.Controls.Add(this.comboBox9);
             this.groupBox1.Controls.Add(this.comboBox7);
             this.groupBox1.Controls.Add(this.comboBox6);
             this.groupBox1.Controls.Add(this.comboBox5);
@@ -112,25 +127,84 @@ namespace WiiDesktop.View
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Possible Mouse Gestures";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // comboBox23
+            // 
+            this.comboBox23.DataSource = ((object)(resources.GetObject("comboBox23.DataSource")));
+            this.comboBox23.FormattingEnabled = true;
+            this.comboBox23.Location = new System.Drawing.Point(69, 307);
+            this.comboBox23.Name = "comboBox23";
+            this.comboBox23.Size = new System.Drawing.Size(121, 21);
+            this.comboBox23.TabIndex = 50;
+            // 
+            // comboBox22
+            // 
+            this.comboBox22.DataSource = ((object)(resources.GetObject("comboBox22.DataSource")));
+            this.comboBox22.FormattingEnabled = true;
+            this.comboBox22.Location = new System.Drawing.Point(69, 267);
+            this.comboBox22.Name = "comboBox22";
+            this.comboBox22.Size = new System.Drawing.Size(121, 21);
+            this.comboBox22.TabIndex = 49;
+            // 
+            // comboBox21
+            // 
+            this.comboBox21.DataSource = ((object)(resources.GetObject("comboBox21.DataSource")));
+            this.comboBox21.FormattingEnabled = true;
+            this.comboBox21.Location = new System.Drawing.Point(69, 231);
+            this.comboBox21.Name = "comboBox21";
+            this.comboBox21.Size = new System.Drawing.Size(121, 21);
+            this.comboBox21.TabIndex = 48;
+            // 
+            // comboBox20
+            // 
+            this.comboBox20.DataSource = ((object)(resources.GetObject("comboBox20.DataSource")));
+            this.comboBox20.FormattingEnabled = true;
+            this.comboBox20.Location = new System.Drawing.Point(69, 183);
+            this.comboBox20.Name = "comboBox20";
+            this.comboBox20.Size = new System.Drawing.Size(121, 21);
+            this.comboBox20.TabIndex = 47;
+            // 
+            // comboBox19
+            // 
+            this.comboBox19.DataSource = ((object)(resources.GetObject("comboBox19.DataSource")));
+            this.comboBox19.FormattingEnabled = true;
+            this.comboBox19.Location = new System.Drawing.Point(69, 147);
+            this.comboBox19.Name = "comboBox19";
+            this.comboBox19.Size = new System.Drawing.Size(121, 21);
+            this.comboBox19.TabIndex = 46;
+            // 
+            // comboBox18
+            // 
+            this.comboBox18.DataSource = ((object)(resources.GetObject("comboBox18.DataSource")));
+            this.comboBox18.FormattingEnabled = true;
+            this.comboBox18.Location = new System.Drawing.Point(69, 111);
+            this.comboBox18.Name = "comboBox18";
+            this.comboBox18.Size = new System.Drawing.Size(121, 21);
+            this.comboBox18.TabIndex = 45;
+            // 
+            // comboBox17
+            // 
+            this.comboBox17.DataSource = ((object)(resources.GetObject("comboBox17.DataSource")));
+            this.comboBox17.FormattingEnabled = true;
+            this.comboBox17.Location = new System.Drawing.Point(69, 61);
+            this.comboBox17.Name = "comboBox17";
+            this.comboBox17.Size = new System.Drawing.Size(121, 21);
+            this.comboBox17.TabIndex = 44;
             // 
             // comboBox9
             // 
+            this.comboBox9.DataSource = ((object)(resources.GetObject("comboBox9.DataSource")));
             this.comboBox9.FormattingEnabled = true;
             this.comboBox9.Location = new System.Drawing.Point(69, 25);
             this.comboBox9.Name = "comboBox9";
             this.comboBox9.Size = new System.Drawing.Size(121, 21);
             this.comboBox9.TabIndex = 43;
-            // 
-            // comboBox8
-            // 
-            this.comboBox8.FormattingEnabled = true;
-            this.comboBox8.Location = new System.Drawing.Point(264, 307);
-            this.comboBox8.Name = "comboBox8";
-            this.comboBox8.Size = new System.Drawing.Size(121, 21);
-            this.comboBox8.TabIndex = 42;
+            
             // 
             // comboBox7
             // 
+            this.comboBox7.DataSource = ((object)(resources.GetObject("comboBox7.DataSource")));
             this.comboBox7.FormattingEnabled = true;
             this.comboBox7.Location = new System.Drawing.Point(264, 267);
             this.comboBox7.Name = "comboBox7";
@@ -139,7 +213,9 @@ namespace WiiDesktop.View
             // 
             // comboBox6
             // 
+            this.comboBox6.DataSource = ((object)(resources.GetObject("comboBox6.DataSource")));
             this.comboBox6.FormattingEnabled = true;
+
             this.comboBox6.Location = new System.Drawing.Point(264, 231);
             this.comboBox6.Name = "comboBox6";
             this.comboBox6.Size = new System.Drawing.Size(121, 21);
@@ -147,6 +223,7 @@ namespace WiiDesktop.View
             // 
             // comboBox5
             // 
+            this.comboBox5.DataSource = ((object)(resources.GetObject("comboBox5.DataSource")));
             this.comboBox5.FormattingEnabled = true;
             this.comboBox5.Location = new System.Drawing.Point(264, 183);
             this.comboBox5.Name = "comboBox5";
@@ -155,7 +232,9 @@ namespace WiiDesktop.View
             // 
             // comboBox4
             // 
+            this.comboBox4.DataSource = ((object)(resources.GetObject("comboBox4.DataSource")));
             this.comboBox4.FormattingEnabled = true;
+            
             this.comboBox4.Location = new System.Drawing.Point(264, 147);
             this.comboBox4.Name = "comboBox4";
             this.comboBox4.Size = new System.Drawing.Size(121, 21);
@@ -163,7 +242,9 @@ namespace WiiDesktop.View
             // 
             // comboBox3
             // 
+            this.comboBox3.DataSource = ((object)(resources.GetObject("comboBox3.DataSource")));
             this.comboBox3.FormattingEnabled = true;
+            
             this.comboBox3.Location = new System.Drawing.Point(264, 111);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(121, 21);
@@ -171,6 +252,7 @@ namespace WiiDesktop.View
             // 
             // comboBox2
             // 
+            this.comboBox2.DataSource = ((object)(resources.GetObject("comboBox2.DataSource")));
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Location = new System.Drawing.Point(264, 61);
             this.comboBox2.Name = "comboBox2";
@@ -180,7 +262,7 @@ namespace WiiDesktop.View
             // 
             // comboBox1
             // 
-        //    this.comboBox1.DataSource = ((object)(resources.GetObject("comboBox1.DataSource")));
+            this.comboBox1.DataSource = ((object)(resources.GetObject("comboBox1.DataSource")));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(264, 25);
             this.comboBox1.Name = "comboBox1";
@@ -325,6 +407,15 @@ namespace WiiDesktop.View
             this.timerReset.Interval = 500;
             this.timerReset.Tick += new System.EventHandler(this.timerReset_Tick);
             // 
+            // comboBox8
+            // 
+            this.comboBox8.FormattingEnabled = true;
+            this.comboBox8.Location = new System.Drawing.Point(264, 307);
+            this.comboBox8.Name = "comboBox8";
+            this.comboBox8.Size = new System.Drawing.Size(121, 21);
+            this.comboBox8.TabIndex = 51;
+            this.comboBox8.SelectedIndexChanged += new System.EventHandler(this.comboBox8_SelectedIndexChanged);
+            // 
             // GesturesScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -380,15 +471,22 @@ namespace WiiDesktop.View
         private System.Windows.Forms.PictureBox pbUp;
         private MouseGestures.MouseGestures mouseGesturesTest;
         private System.Windows.Forms.Timer timerReset;
-        private ComboBox comboBox2;
-        private ComboBox comboBox9;
-        private ComboBox comboBox8;
-        private ComboBox comboBox7;
-        private ComboBox comboBox6;
-        private ComboBox comboBox5;
-        private ComboBox comboBox4;
-        private ComboBox comboBox3;
+        private ApplicationsComboBox comboBox2;
+        private ApplicationsComboBox comboBox9;
+        private ApplicationsComboBox comboBox7;
+        private ApplicationsComboBox comboBox6;
+        private ApplicationsComboBox comboBox5;
+        private ApplicationsComboBox comboBox4;
+        private ApplicationsComboBox comboBox3;
         private ApplicationsComboBox comboBox1;
+        private ApplicationsComboBox comboBox18;
+        private ApplicationsComboBox comboBox17;
+        private ApplicationsComboBox comboBox19;
+        private ApplicationsComboBox comboBox23;
+        private ApplicationsComboBox comboBox22;
+        private ApplicationsComboBox comboBox21;
+        private ApplicationsComboBox comboBox20;
+        private ApplicationsComboBox comboBox8;
 
     }
 
