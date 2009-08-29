@@ -19,6 +19,20 @@ namespace WiiDesktop.Domain.Handlers
         public const int MOUSEEVENTF_MIDDLEDOWN = 0x20;
         public const int MOUSEEVENTF_MIDDLEUP = 0x40;
         public const int MOUSEEVENTF_ABSOLUTE = 0x8000;
+        
+        // Tiempo mínimo (en segundos) que hay que mantener apretado
+        // el puntero para interpretar el evento como un click derecho.
+        public const int MOUSE_DOWN_DELAY = 1;
+
+        // Distancia (en pixeles) que puede variar la posición del puntero
+        // cuando se desea realiar un click derecho.
+        public const int MOUSE_DOWN_POINT_MARGIN = 100;
+
+        protected int screenWidth;
+        protected int screenHeight;
+        protected static long mouseDownStartTime = 0;
+        protected static PointF mouseDownStartPoint = new PointF(0, 0);
+        protected static PointF mouseDownEndPoint = new PointF(0, 0);
 
         [DllImport("user32.dll", SetLastError = true)]
         protected static extern uint SendInput(uint nInputs, INPUT[] pInputs, int cbSize);
@@ -63,6 +77,13 @@ namespace WiiDesktop.Domain.Handlers
             public uint uMsg;
             public ushort wParamL;
             public ushort wParamH;
+        }
+
+        public MouseHandler(EventHandler nextHandler, int screenWidth, int screenHeight)
+        {
+            this.nextHandler = nextHandler;
+            this.screenWidth = screenWidth;
+            this.screenHeight = screenHeight;
         }
 
     }

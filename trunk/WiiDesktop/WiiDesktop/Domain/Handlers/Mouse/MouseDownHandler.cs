@@ -10,14 +10,9 @@ namespace WiiDesktop.Domain.Handlers.Mouse
 {
     class MouseDownHandler : MouseHandler
     {
-        private int screenWidth;
-        private int screenHeight;
-
         public MouseDownHandler(EventHandler nextHandler, int screenWidth, int screenHeight)
+               : base(nextHandler, screenWidth, screenHeight)
         {
-            this.nextHandler = nextHandler;
-            this.screenWidth = screenWidth;
-            this.screenHeight = screenHeight;
         }
 
         override protected bool InnerHandle(WiimoteState currentState, WiimoteState lastState)
@@ -25,6 +20,11 @@ namespace WiiDesktop.Domain.Handlers.Mouse
             if (currentState.IRState.Found1 && !lastState.IRState.Found1)
             {
                 PointF warpedCoordinates = CursorWarper.warp(new PointF(currentState.IRState.RawX1, currentState.IRState.RawY1));
+                
+                mouseDownStartPoint.X = warpedCoordinates.X;
+                mouseDownStartPoint.Y = warpedCoordinates.Y;
+                mouseDownStartTime = DateTime.Now.Ticks;
+
                 CursorSmoother.smoothCursor(warpedCoordinates);
                 CursorSmoother.SmoothingBufferIndex = 0;
 
