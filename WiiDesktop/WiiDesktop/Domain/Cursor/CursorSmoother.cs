@@ -8,7 +8,7 @@ namespace WiiDesktop.Domain.Cursor
     static class CursorSmoother
     {
         private const int SMOOTHING_BUFFER_SIZE = 50;
-        private const int SMOOTHING_AMOUNT = 4;
+        private const int SMOOTHING_AMOUNT = 20;
 
         private static PointF[] smoothingBuffer;
 

@@ -19,7 +19,7 @@ namespace WiiDesktop.Controller
             this.lastState = new WiimoteState();            
             
             EventHandler keyboardHandler = new KeyboardHandler(null);
-            EventHandler mouseUpHandler = new MouseUpHandler(keyboardHandler);
+            EventHandler mouseUpHandler = new MouseUpHandler(keyboardHandler, screenWidth, screenHeight);
             EventHandler mouseDragHandler = new MouseDragHandler(mouseUpHandler, screenWidth, screenHeight);
             this.eventHandler = new MouseDownHandler(mouseDragHandler, screenWidth, screenHeight);
         }
