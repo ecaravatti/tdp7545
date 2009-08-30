@@ -70,7 +70,7 @@ namespace WiiDesktop.View
         {
             //resets images to normal
             ResetImages();
-            timerReset.Stop();
+//            timerReset.Stop();
         }
         
         private void ResetImages()
@@ -114,7 +114,7 @@ namespace WiiDesktop.View
                     //load image from the resources
                     pb.Image = new Bitmap(Assembly.GetExecutingAssembly().GetManifestResourceStream(
               getResourceName(e.Gesture, true)));
-                    timerReset.Start();
+//                    timerReset.Start();
                     return;
                 }
             }

@@ -33,6 +33,7 @@ namespace WiiDesktop.View
             this.wiimoteBatteryLabel = new System.Windows.Forms.Label();
             this.wiimoteBatteryBar = new System.Windows.Forms.ProgressBar();
             this.loadCalibration = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.wiimoteBattery.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -84,11 +85,22 @@ namespace WiiDesktop.View
             this.loadCalibration.UseVisualStyleBackColor = true;
             this.loadCalibration.Click += new System.EventHandler(this.loadCalibration_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(12, 153);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(129, 41);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Configurar Gestos";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // MainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(153, 158);
+            this.ClientSize = new System.Drawing.Size(153, 206);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.loadCalibration);
             this.Controls.Add(this.wiimoteBattery);
             this.Controls.Add(this.calibrate);
@@ -109,5 +121,6 @@ namespace WiiDesktop.View
         private System.Windows.Forms.ProgressBar wiimoteBatteryBar;
         private System.Windows.Forms.Button loadCalibration;
         private System.Windows.Forms.Label wiimoteBatteryLabel;
+        private System.Windows.Forms.Button button1;
     }
 }

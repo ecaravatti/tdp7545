@@ -62,6 +62,11 @@ namespace WiiDesktop.View
             wiimoteBatteryBar.Value = batteryCharge;
             wiimoteBatteryLabel.Text = batteryCharge.ToString() + "%";
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            (new GesturesScreen()).Show();
+        }
         
     }
 }
