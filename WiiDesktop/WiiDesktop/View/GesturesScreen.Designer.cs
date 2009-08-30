@@ -65,8 +65,6 @@ namespace WiiDesktop.View
             this.pbUpLeft = new System.Windows.Forms.PictureBox();
             this.pbUpDown = new System.Windows.Forms.PictureBox();
             this.pbUpRight = new System.Windows.Forms.PictureBox();
-//            this.mouseGesturesTest = new MouseGestures.MouseGestures(this.components);
-//            this.timerReset = new System.Windows.Forms.Timer(this.components);
             this.comboBox8 = new ApplicationsComboBox(MouseGesture.LeftDown);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbRight)).BeginInit();
@@ -397,15 +395,7 @@ namespace WiiDesktop.View
             this.pbUpRight.Size = new System.Drawing.Size(32, 32);
             this.pbUpRight.TabIndex = 0;
             this.pbUpRight.TabStop = false;
-            // 
-            // mouseGesturesTest
-            // 
-//            this.mouseGesturesTest.Gesture += new MouseGestures.MouseGestures.GestureHandler(this.mouseGesturesTest_Gesture);
-            // 
-            // timerReset
-            // 
-//            this.timerReset.Interval = 500;
-//            this.timerReset.Tick += new System.EventHandler(this.timerReset_Tick);
+
             // 
             // comboBox8
             // 
@@ -469,8 +459,6 @@ namespace WiiDesktop.View
         private System.Windows.Forms.PictureBox pbDown;
         private System.Windows.Forms.PictureBox pbLeft;
         private System.Windows.Forms.PictureBox pbUp;
-  //      private MouseGestures.MouseGestures mouseGesturesTest;
-  //      private System.Windows.Forms.Timer timerReset;
         private ApplicationsComboBox comboBox2;
         private ApplicationsComboBox comboBox9;
         private ApplicationsComboBox comboBox7;
