@@ -103,7 +103,11 @@ namespace WiiDesktop.View
             this.groupBox1.Controls.Add(this.pbUpRight);
             this.groupBox1.Location = new System.Drawing.Point(4, 9);
             this.groupBox1.Name = "groupBox1";
+<<<<<<< .mine
+            this.groupBox1.Size = new System.Drawing.Size(402, 352);
+=======
             this.groupBox1.Size = new System.Drawing.Size(405, 352);
+>>>>>>> .r26
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Gestos Predefinidos";
@@ -1844,7 +1848,11 @@ namespace WiiDesktop.View
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+<<<<<<< .mine
+            this.ClientSize = new System.Drawing.Size(418, 374);
+=======
             this.ClientSize = new System.Drawing.Size(421, 374);
+>>>>>>> .r26
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
