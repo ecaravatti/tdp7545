@@ -66,13 +66,6 @@ namespace WiiDesktop.View
             mouseGestureDisplay[15] = pbLeftDown;
         }
 
-        private void timerReset_Tick(object sender, EventArgs e)
-        {
-            //resets images to normal
-            ResetImages();
-//            timerReset.Stop();
-        }
-        
         private void ResetImages()
         {
             foreach (PictureBox pb in mouseGestureDisplay)
