@@ -135,6 +135,8 @@
     <Content Include="Domain\Gestures\MouseGestures.csproj" />
     <Content Include="libs\System.Management.dll" />
     <Content Include="libs\WiimoteLib.dll" />
+    <EmbeddedResource Include="Resources\Images\configIcon.png">
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Images\Down.png" />
     <EmbeddedResource Include="Resources\Images\DownA.png" />
     <EmbeddedResource Include="Resources\Images\DownLeft.png" />
@@ -170,6 +172,10 @@
     <EmbeddedResource Include="Resources\Images\UpLeftA.png" />
     <EmbeddedResource Include="Resources\Images\UpRight.png" />
     <EmbeddedResource Include="Resources\Images\UpRightA.png" />
+    <EmbeddedResource Include="View\GScreen.resx">
+      <DependentUpon>GScreen.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Domain\Handlers\Gesture\" />
