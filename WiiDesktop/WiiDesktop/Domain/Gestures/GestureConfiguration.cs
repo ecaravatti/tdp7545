@@ -4,17 +4,52 @@ using System.Text;
 using MouseGestures;
 using System.IO;
 using System.Diagnostics;
+using WiiDesktop.Common;
+using System.Collections;
 
 namespace WiiDesktop.Domain.Gestures
 {
     public class GestureConfiguration
     {
+        // Members
         private Dictionary<MouseGesture, String> configMap;
         private static GestureConfiguration instance = new GestureConfiguration();
+        private const string FILE_PATH = @"c:\Users\Laura\Desktop\gesturesConfig.txt";
 
-        private GestureConfiguration() {
-            FillMap();
+        #region Privates Methods
+       
+        private GestureConfiguration()
+        {
+            InitializeMap();
         }
+
+        private void InitializeMap()
+        {
+            if (configMap == null)
+                configMap = new Dictionary<MouseGesture, string>();
+        }
+
+        private void FillMap()
+        {
+            configMap = new Dictionary<MouseGesture, string>();
+            configMap.Add(MouseGesture.Down, "calc.exe");
+            configMap.Add(MouseGesture.Up, "iexplore.exe");
+        }
+
+        private Dictionary<MouseGesture, String> Clone()
+        {
+            Dictionary<MouseGesture, String> clone = new Dictionary<MouseGesture, String>();
+
+            foreach (KeyValuePair<MouseGesture, String> item in configMap)
+            {
+                clone.Add(item.Key, item.Value);
+            }
+
+            return clone;
+        }
+
+        #endregion
+        
 
         public static GestureConfiguration Instance{
             get { return instance; }
@@ -23,23 +58,48 @@ namespace WiiDesktop.Domain.Gestures
         public void SaveConfiguration()
         {
             // Specify file, instructions, and privelegdes
-            FileStream file = new FileStream(@"c:\Users\Laura\Desktop\gesturesConfig.txt", FileMode.OpenOrCreate, FileAccess.Write);
+            FileStream file = new FileStream(FILE_PATH, FileMode.OpenOrCreate, FileAccess.Write);
             StreamWriter sw = new StreamWriter(file);
             foreach (KeyValuePair<MouseGesture, String> item in configMap)
             {
                 sw.WriteLine(item.Key + "=" + item.Value);
-                //Debug.Write(item.Key + "-" + item.Value);
             }
             sw.Close();
             file.Close();
-
         }
 
-        private void FillMap() 
+        public Dictionary<MouseGesture, String> GetConfiguration() 
         {
-            configMap = new Dictionary<MouseGesture, string>();
-            configMap.Add(MouseGesture.Down, "calc.exe");
-            configMap.Add(MouseGesture.Up, "iexplore.exe");
+            return configMap;
+        }
+
+        public void FillMapFromFile()
+        {
+            InitializeMap();
+            configMap.Clear();
+            PropertiesReader propertiesReader = new PropertiesReader(FILE_PATH);
+            foreach (DictionaryEntry item in propertiesReader)
+            {
+                Debug.Write(item.Key.ToString() + "=" + item.Value.ToString());
+                MouseGesture mouseGesture = (MouseGesture)Enum.Parse(typeof(MouseGesture), item.Key.ToString());
+                configMap.Add(mouseGesture, item.Value.ToString());
+            }
+        }
+
+        public bool ExistsConfiguration() 
+        {
+            bool exists = true;
+            try
+            {
+                StreamReader reader = File.OpenText(FILE_PATH);
+            }
+            catch (FileNotFoundException)
+            {
+                exists = false;
+            }
+            
+            return exists;
+            
         }
 
         public string ResolveCommand(MouseGesture mGesture) 
@@ -61,6 +121,13 @@ namespace WiiDesktop.Domain.Gestures
                 configMap.Remove(gesture);
                 configMap.Add(gesture, application);
             }
+        }
+
+
+
+        public Dictionary<MouseGesture, String> GetConfigurationCopy() 
+        {
+            return Clone();
         }
         
     }

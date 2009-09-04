@@ -116,8 +116,75 @@ namespace WiiDesktop.View
         private void MainForm_Load(object sender, EventArgs e)
         {
             ResetImages();
+            // Si existe uan configuración guardada, cargo los combos
+            if (GestureConfiguration.Instance.ExistsConfiguration()) 
+            {
+                GestureConfiguration.Instance.FillMapFromFile();
+                Dictionary<MouseGesture, String> configMap = GestureConfiguration.Instance.GetConfigurationCopy();
+                SetDropDowns(configMap);
+            }
         }
 
+        private void SetDropDowns(Dictionary<MouseGesture, String> configMap)
+        {
+            foreach (KeyValuePair<MouseGesture, String> item in configMap)
+            {
+                switch (item.Key) 
+                {
+                    case MouseGesture.Down:
+                        this.comboBox1.setOption(item.Value);
+                        break;
+                    case MouseGesture.DownLeft:
+                        this.comboBox5.setOption(item.Value);
+                        break;
+                    case MouseGesture.DownRight:
+                        this.comboBox4.setOption(item.Value);
+                        break;
+                    case MouseGesture.DownUp:
+                        this.comboBox3.setOption(item.Value);
+                        break;
+                    case MouseGesture.Left:
+                        this.comboBox17.setOption(item.Value);
+                        break;
+                    case MouseGesture.LeftDown:
+                        this.comboBox8.setOption(item.Value);
+                        break;
+                    case MouseGesture.LeftRight:
+                        this.comboBox7.setOption(item.Value);
+                        break;
+                    case MouseGesture.LeftUp:
+                        this.comboBox6.setOption(item.Value);
+                        break;
+                    case MouseGesture.Right:
+                        this.comboBox2.setOption(item.Value);
+                        break;
+                    case MouseGesture.RightDown:
+                        this.comboBox22.setOption(item.Value);
+                        break;
+                    case MouseGesture.RightLeft:
+                        this.comboBox23.setOption(item.Value);
+                        break;
+                    case MouseGesture.RightUp:
+                        this.comboBox21.setOption(item.Value);
+                        break;
+                    case MouseGesture.Up:
+                        this.comboBox9.setOption(item.Value);
+                        break;
+                    case MouseGesture.UpDown:
+                        this.comboBox19.setOption(item.Value);
+                        break;
+                    case MouseGesture.UpLeft:
+                        this.comboBox20.setOption(item.Value);
+                        break;
+                    case MouseGesture.UpRight:
+                        this.comboBox18.setOption(item.Value);
+                        break;
+                }
+            }
+
+
+        }
+        
         private void pbUp_Click(object sender, EventArgs e)
         {
 

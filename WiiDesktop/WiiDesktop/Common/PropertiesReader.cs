@@ -18,24 +18,23 @@ namespace WiiDesktop.Common
         /// </summary>
         /// <param name=\"fileName\"></param>
 		public PropertiesReader(string fileName){
-            using (StreamReader re = File.OpenText(fileName)) {
+            using (StreamReader reader = File.OpenText(fileName)) {
                 string input = null;
-                while ((input = re.ReadLine()) != null) {
+                while ((input = reader.ReadLine()) != null) {
                     ProcessLine(input);
                 }
+                reader.Close();
             }
 		}
 
         /// <summary>
         /// Reads in the line from the text file and splits it into 2 parts.  If there are
-        /// more \"=\" symbols in the text, only the first one is used as a separator.  If the
-        /// line begins with a \"#\" symbol, then that line is a comment.  Comments are skipped.
+        /// more \"=\" symbols in the text, only the first one is used as a separator. 
         /// </summary>
         /// <param name=\"input\"></param>
         protected void ProcessLine(string input) {
-            // Break the line into a key value pair.  We separate on the first = symbol
             string[] pair = input.Split(new char[] {'='}, 2);
-            if (null != pair[0])
+            if (pair[0] != null && pair[0] != String.Empty)
             {
                 Add(pair[0].Trim(), pair[1].Trim());
             }

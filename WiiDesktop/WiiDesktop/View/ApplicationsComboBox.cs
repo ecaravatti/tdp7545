@@ -24,5 +24,12 @@ namespace WiiDesktop.View
         {
             GestureConfiguration.Instance.UpdateCommand(gesture, this.SelectedItem.ToString());
         }
+
+        public void setOption(String option)
+        {
+            SelectedItem = option;
+        }
+
+        
     }
 }
