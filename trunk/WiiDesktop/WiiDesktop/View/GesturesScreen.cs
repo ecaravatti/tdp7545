@@ -142,5 +142,10 @@ namespace WiiDesktop.View
         {
 
         }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            GestureConfiguration.Instance.SaveConfiguration();
+        }
     }
 }
