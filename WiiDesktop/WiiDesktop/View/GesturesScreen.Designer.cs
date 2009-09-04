@@ -33,7 +33,7 @@ namespace WiiDesktop.View
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GesturesScreen));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.comboBox23 = new ApplicationsComboBox(MouseGesture.RightLeft);
+   this.comboBox23 = new ApplicationsComboBox(MouseGesture.RightLeft);
             this.comboBox22 = new ApplicationsComboBox(MouseGesture.RightDown);
             this.comboBox21 = new ApplicationsComboBox(MouseGesture.RightUp);
             this.comboBox20 = new ApplicationsComboBox(MouseGesture.UpLeft);
@@ -41,6 +41,7 @@ namespace WiiDesktop.View
             this.comboBox18 = new ApplicationsComboBox(MouseGesture.UpRight);
             this.comboBox17 = new ApplicationsComboBox(MouseGesture.Left);
             this.comboBox9 = new ApplicationsComboBox(MouseGesture.Up);
+            this.comboBox8 = new ApplicationsComboBox(MouseGesture.LeftDown);
             this.comboBox7 = new ApplicationsComboBox(MouseGesture.LeftRight);
             this.comboBox6 = new ApplicationsComboBox(MouseGesture.LeftUp);
             this.comboBox5 = new ApplicationsComboBox(MouseGesture.DownLeft);
@@ -48,7 +49,6 @@ namespace WiiDesktop.View
             this.comboBox3 = new ApplicationsComboBox(MouseGesture.DownUp);
             this.comboBox2 = new ApplicationsComboBox(MouseGesture.Right);
             this.comboBox1 = new ApplicationsComboBox(MouseGesture.Down);
-            
             this.pbRight = new System.Windows.Forms.PictureBox();
             this.pbDown = new System.Windows.Forms.PictureBox();
             this.pbLeft = new System.Windows.Forms.PictureBox();
@@ -65,7 +65,8 @@ namespace WiiDesktop.View
             this.pbUpLeft = new System.Windows.Forms.PictureBox();
             this.pbUpDown = new System.Windows.Forms.PictureBox();
             this.pbUpRight = new System.Windows.Forms.PictureBox();
-            this.comboBox8 = new ApplicationsComboBox(MouseGesture.LeftDown);
+            this.btnSave = new System.Windows.Forms.Button();
+
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbRight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbDown)).BeginInit();
@@ -126,6 +127,7 @@ namespace WiiDesktop.View
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Possible Mouse Gestures";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+       
             // 
             // comboBox23
             // 
@@ -194,11 +196,24 @@ namespace WiiDesktop.View
             // 
             this.comboBox9.DataSource = ((object)(resources.GetObject("comboBox9.DataSource")));
             this.comboBox9.FormattingEnabled = true;
+
+
             this.comboBox9.Location = new System.Drawing.Point(69, 25);
             this.comboBox9.Name = "comboBox9";
             this.comboBox9.Size = new System.Drawing.Size(121, 21);
-            this.comboBox9.TabIndex = 43;
-            
+            this.comboBox9.TabIndex = 43;  
+
+            // 
+            // comboBox8
+            // 
+            this.comboBox8.FormattingEnabled = true;
+            this.comboBox8.Location = new System.Drawing.Point(264, 307);
+            this.comboBox8.Name = "comboBox8";
+            this.comboBox8.Size = new System.Drawing.Size(121, 21);
+            this.comboBox8.TabIndex = 51;
+            this.comboBox8.SelectedIndexChanged += new System.EventHandler(this.comboBox8_SelectedIndexChanged);
+
+
             // 
             // comboBox7
             // 
@@ -213,7 +228,6 @@ namespace WiiDesktop.View
             // 
             this.comboBox6.DataSource = ((object)(resources.GetObject("comboBox6.DataSource")));
             this.comboBox6.FormattingEnabled = true;
-
             this.comboBox6.Location = new System.Drawing.Point(264, 231);
             this.comboBox6.Name = "comboBox6";
             this.comboBox6.Size = new System.Drawing.Size(121, 21);
@@ -232,7 +246,6 @@ namespace WiiDesktop.View
             // 
             this.comboBox4.DataSource = ((object)(resources.GetObject("comboBox4.DataSource")));
             this.comboBox4.FormattingEnabled = true;
-            
             this.comboBox4.Location = new System.Drawing.Point(264, 147);
             this.comboBox4.Name = "comboBox4";
             this.comboBox4.Size = new System.Drawing.Size(121, 21);
@@ -242,7 +255,6 @@ namespace WiiDesktop.View
             // 
             this.comboBox3.DataSource = ((object)(resources.GetObject("comboBox3.DataSource")));
             this.comboBox3.FormattingEnabled = true;
-            
             this.comboBox3.Location = new System.Drawing.Point(264, 111);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(121, 21);
@@ -396,20 +408,25 @@ namespace WiiDesktop.View
             this.pbUpRight.TabIndex = 0;
             this.pbUpRight.TabStop = false;
             // 
-            // comboBox8
+            // btnSave
             // 
-            this.comboBox8.FormattingEnabled = true;
-            this.comboBox8.Location = new System.Drawing.Point(264, 307);
-            this.comboBox8.Name = "comboBox8";
-            this.comboBox8.Size = new System.Drawing.Size(121, 21);
-            this.comboBox8.TabIndex = 51;
-            this.comboBox8.SelectedIndexChanged += new System.EventHandler(this.comboBox8_SelectedIndexChanged);
+            this.btnSave.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.Location = new System.Drawing.Point(171, 367);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(62, 22);
+            this.btnSave.TabIndex = 5;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // GesturesScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(418, 374);
+            this.ClientSize = new System.Drawing.Size(410, 392);
+            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -474,7 +491,21 @@ namespace WiiDesktop.View
         private ApplicationsComboBox comboBox21;
         private ApplicationsComboBox comboBox20;
         private ApplicationsComboBox comboBox8;
+        private Button btnSave;
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

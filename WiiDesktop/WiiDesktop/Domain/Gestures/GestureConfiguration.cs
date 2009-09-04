@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using MouseGestures;
+using System.IO;
+using System.Diagnostics;
 
 namespace WiiDesktop.Domain.Gestures
 {
@@ -16,6 +18,21 @@ namespace WiiDesktop.Domain.Gestures
 
         public static GestureConfiguration Instance{
             get { return instance; }
+        }
+
+        public void SaveConfiguration()
+        {
+            // Specify file, instructions, and privelegdes
+            FileStream file = new FileStream(@"c:\Users\Laura\Desktop\gesturesConfig.txt", FileMode.OpenOrCreate, FileAccess.Write);
+            StreamWriter sw = new StreamWriter(file);
+            foreach (KeyValuePair<MouseGesture, String> item in configMap)
+            {
+                sw.WriteLine(item.Key + "=" + item.Value);
+                //Debug.Write(item.Key + "-" + item.Value);
+            }
+            sw.Close();
+            file.Close();
+
         }
 
         private void FillMap() 

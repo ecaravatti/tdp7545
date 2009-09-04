@@ -37,6 +37,7 @@
   </Target>
   -->
   <ItemGroup>
+    <Compile Include="Common\PropertiesReader.cs" />
     <Compile Include="Controller\WiimoteController.cs" />
     <Compile Include="Domain\Calibration\CalibrationData.cs" />
     <Compile Include="Domain\Calibration\CalibrationPersister.cs" />
