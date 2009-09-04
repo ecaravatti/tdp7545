@@ -26,7 +26,11 @@ namespace WiiDesktop.Domain.Gestures
         private void InitializeMap()
         {
             if (configMap == null)
+            {
                 configMap = new Dictionary<MouseGesture, string>();
+                if (ExistsConfiguration())
+                    FillMapFromFile();
+            }
         }
 
         private void FillMap()
@@ -75,7 +79,6 @@ namespace WiiDesktop.Domain.Gestures
 
         public void FillMapFromFile()
         {
-            InitializeMap();
             configMap.Clear();
             PropertiesReader propertiesReader = new PropertiesReader(FILE_PATH);
             foreach (DictionaryEntry item in propertiesReader)
@@ -84,6 +87,7 @@ namespace WiiDesktop.Domain.Gestures
                 MouseGesture mouseGesture = (MouseGesture)Enum.Parse(typeof(MouseGesture), item.Key.ToString());
                 configMap.Add(mouseGesture, item.Value.ToString());
             }
+
         }
 
         public bool ExistsConfiguration() 
@@ -92,6 +96,7 @@ namespace WiiDesktop.Domain.Gestures
             try
             {
                 StreamReader reader = File.OpenText(FILE_PATH);
+                reader.Close();
             }
             catch (FileNotFoundException)
             {

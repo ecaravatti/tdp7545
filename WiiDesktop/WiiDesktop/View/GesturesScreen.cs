@@ -117,12 +117,8 @@ namespace WiiDesktop.View
         {
             ResetImages();
             // Si existe uan configuración guardada, cargo los combos
-            if (GestureConfiguration.Instance.ExistsConfiguration()) 
-            {
-                GestureConfiguration.Instance.FillMapFromFile();
-                Dictionary<MouseGesture, String> configMap = GestureConfiguration.Instance.GetConfigurationCopy();
-                SetDropDowns(configMap);
-            }
+             Dictionary<MouseGesture, String> configMap = GestureConfiguration.Instance.GetConfigurationCopy();
+             SetDropDowns(configMap);
         }
 
         private void SetDropDowns(Dictionary<MouseGesture, String> configMap)
