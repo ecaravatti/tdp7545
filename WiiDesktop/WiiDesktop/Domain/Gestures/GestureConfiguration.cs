@@ -92,19 +92,7 @@ namespace WiiDesktop.Domain.Gestures
 
         public bool ExistsConfiguration() 
         {
-            bool exists = true;
-            try
-            {
-                StreamReader reader = File.OpenText(FILE_PATH);
-                reader.Close();
-            }
-            catch (FileNotFoundException)
-            {
-                exists = false;
-            }
-            
-            return exists;
-            
+            return File.Exists(FILE_PATH);
         }
 
         public string ResolveCommand(MouseGesture mGesture) 
