@@ -433,7 +433,7 @@ namespace WiiDesktop.View
             this.MinimizeBox = false;
             this.Name = "GesturesScreen";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.Text = "Mouse Gesture Test";
+            this.Text = "Gestures Configuration";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbRight)).EndInit();
