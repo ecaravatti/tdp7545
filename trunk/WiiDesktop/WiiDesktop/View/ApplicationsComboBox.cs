@@ -18,6 +18,7 @@ namespace WiiDesktop.View
             this.gesture = gesture;
             this.DataSource = ApplicationsFinder.GetAvailableApplications();
             this.SelectedIndexChanged += new System.EventHandler(this.OnChange);
+            this.SelectedIndex = -1;
         }
 
         protected void OnChange(object sender, EventArgs e)

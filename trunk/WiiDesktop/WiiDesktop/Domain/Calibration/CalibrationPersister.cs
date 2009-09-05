@@ -4,6 +4,7 @@ using System.Text;
 using System.IO;
 using WiiDesktop.Domain.Cursor;
 using WiiDesktop.Exceptions;
+using WiiDesktop.Common;
 
 namespace WiiDesktop.Domain.Calibration
 {
@@ -13,7 +14,13 @@ namespace WiiDesktop.Domain.Calibration
 
         public static void SaveCalibrationData(CalibrationData data)
         {
-            TextWriter tw = new StreamWriter(CALIBRATION_FILE_NAME);
+            // Creates directory if it not exists
+            if (!Directory.Exists(Settings.CONFIGURATION_DATA_PATH))
+            {
+                Directory.CreateDirectory(Settings.CONFIGURATION_DATA_PATH);
+            }
+
+            TextWriter tw = new StreamWriter(Settings.CONFIGURATION_DATA_PATH + CALIBRATION_FILE_NAME);
 
             for (int i = 0; i < CalibrationData.CALIBRATION_POINTS; i++)
             {
@@ -30,7 +37,7 @@ namespace WiiDesktop.Domain.Calibration
             {
                 CalibrationData data = new CalibrationData();
 
-                TextReader tr = new StreamReader(CALIBRATION_FILE_NAME);
+                TextReader tr = new StreamReader(Settings.CONFIGURATION_DATA_PATH + CALIBRATION_FILE_NAME);
 
                 for (int i = 0; i < CalibrationData.CALIBRATION_POINTS; i++)
                 {
