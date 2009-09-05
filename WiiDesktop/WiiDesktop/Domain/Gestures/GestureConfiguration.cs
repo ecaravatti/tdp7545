@@ -14,7 +14,7 @@ namespace WiiDesktop.Domain.Gestures
         // Members
         private Dictionary<MouseGesture, String> configMap;
         private static GestureConfiguration instance = new GestureConfiguration();
-        private const string FILE_PATH = @"c:\Users\Laura\Desktop\gesturesConfig.txt";
+        private const string GESTURES_FILE_NAME = "gestures.dat";
 
         #region Privates Methods
        
@@ -33,13 +33,6 @@ namespace WiiDesktop.Domain.Gestures
             }
         }
 
-        private void FillMap()
-        {
-            configMap = new Dictionary<MouseGesture, string>();
-            configMap.Add(MouseGesture.Down, "calc.exe");
-            configMap.Add(MouseGesture.Up, "iexplore.exe");
-        }
-
         private Dictionary<MouseGesture, String> Clone()
         {
             Dictionary<MouseGesture, String> clone = new Dictionary<MouseGesture, String>();
@@ -54,15 +47,21 @@ namespace WiiDesktop.Domain.Gestures
 
         #endregion
         
-
         public static GestureConfiguration Instance{
             get { return instance; }
         }
 
         public void SaveConfiguration()
         {
+            // Creates directory if it not exists
+            if (!Directory.Exists(Settings.CONFIGURATION_DATA_PATH))
+            {
+                Directory.CreateDirectory(Settings.CONFIGURATION_DATA_PATH);
+            }
+
             // Specify file, instructions, and privelegdes
-            FileStream file = new FileStream(FILE_PATH, FileMode.OpenOrCreate, FileAccess.Write);
+            FileStream file = new FileStream(Settings.CONFIGURATION_DATA_PATH + GESTURES_FILE_NAME,
+                                             FileMode.OpenOrCreate, FileAccess.Write);
             StreamWriter sw = new StreamWriter(file);
             foreach (KeyValuePair<MouseGesture, String> item in configMap)
             {
@@ -80,7 +79,7 @@ namespace WiiDesktop.Domain.Gestures
         public void FillMapFromFile()
         {
             configMap.Clear();
-            PropertiesReader propertiesReader = new PropertiesReader(FILE_PATH);
+            PropertiesReader propertiesReader = new PropertiesReader(Settings.CONFIGURATION_DATA_PATH + GESTURES_FILE_NAME);
             foreach (DictionaryEntry item in propertiesReader)
             {
                 Debug.Write(item.Key.ToString() + "=" + item.Value.ToString());
@@ -92,7 +91,7 @@ namespace WiiDesktop.Domain.Gestures
 
         public bool ExistsConfiguration() 
         {
-            return File.Exists(FILE_PATH);
+            return File.Exists(Settings.CONFIGURATION_DATA_PATH + GESTURES_FILE_NAME);
         }
 
         public string ResolveCommand(MouseGesture mGesture) 
@@ -115,8 +114,6 @@ namespace WiiDesktop.Domain.Gestures
                 configMap.Add(gesture, application);
             }
         }
-
-
 
         public Dictionary<MouseGesture, String> GetConfigurationCopy() 
         {
