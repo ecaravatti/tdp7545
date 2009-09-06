@@ -6,18 +6,19 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using WiiDesktop.Controller;
+using System.Threading;
 
 namespace WiiDesktop.View
 {
     public partial class MainScreen : Form
     {
         private VirtualDesktop model;
-        private Timer batteryTimer;
+        private System.Windows.Forms.Timer batteryTimer;
 
         public MainScreen(VirtualDesktop model)
         {
             this.model = model;
-            this.batteryTimer = new Timer();
+            this.batteryTimer = new System.Windows.Forms.Timer();
             InitializeComponent();
             SetBatteryCharge();
             batteryTimer.Interval = 1000*60*5; //5 min

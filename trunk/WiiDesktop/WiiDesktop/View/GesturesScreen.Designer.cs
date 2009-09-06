@@ -425,6 +425,7 @@ namespace WiiDesktop.View
             this.MinimizeBox = false;
             this.Name = "GesturesScreen";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Configuración de Gestos";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.groupBox1.ResumeLayout(false);
