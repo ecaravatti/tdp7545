@@ -35,6 +35,6 @@ namespace WiiDesktop.View
             this.pbGesture.Image = new Bitmap(Assembly.GetExecutingAssembly().GetManifestResourceStream(
             "WiiDesktop.Resources.Images.configIcon.png"));
         }
-     
+
     }
 }

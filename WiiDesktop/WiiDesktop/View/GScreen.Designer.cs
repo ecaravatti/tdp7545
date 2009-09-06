@@ -80,7 +80,7 @@ namespace WiiDesktop.View
             this.groupBox1.Size = new System.Drawing.Size(260, 100);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Recognized gesture";
+            this.groupBox1.Text = "Area de Gestos";
             // 
             // GScreen
             // 
@@ -88,8 +88,14 @@ namespace WiiDesktop.View
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 125);
             this.Controls.Add(this.groupBox1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "GScreen";
-            this.Text = "GScreen";
+            this.Text = "G-Screen";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
+            //this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GScreen_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.pbGesture)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -139,8 +145,5 @@ namespace WiiDesktop.View
         }
 
         private GroupBox groupBox1;
-
-
-
     }
 }

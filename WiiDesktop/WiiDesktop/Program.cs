@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using WiiDesktop.Controller;
 using WiiDesktop.View;
 using WiiDesktop.Exceptions;
+using System.Threading;
 
 namespace WiiDesktop
 {
@@ -36,6 +37,7 @@ namespace WiiDesktop
                     retry = result.Equals(DialogResult.Retry);
                 }
             }
-		}
-	}
+        }
+
+    }
 }
