@@ -14,6 +14,7 @@ namespace WiiDesktop.View
     {
         private VirtualDesktop model;
         private System.Windows.Forms.Timer batteryTimer;
+        private Thread gScreenThread;
 
         public MainScreen(VirtualDesktop model)
         {
@@ -24,7 +25,7 @@ namespace WiiDesktop.View
             batteryTimer.Interval = 1000*60*5; //5 min
             batteryTimer.Tick += new EventHandler(Timer_Tick);
             batteryTimer.Start();
-            LaunchThread();
+            LaunchGScreenThread();
         }
 
         private void loadCalibration_Click(object sender, EventArgs e)
@@ -46,6 +47,7 @@ namespace WiiDesktop.View
 
         private void MainScreen_FormClosing(object sender, EventArgs e)
         {
+            gScreenThread.Abort();
             batteryTimer.Stop();
             model.StopDesktop();
         }
@@ -76,10 +78,10 @@ namespace WiiDesktop.View
             gScreen.ShowDialog();
         }
 
-        private void LaunchThread() 
+        private void LaunchGScreenThread() 
         {
-            Thread thread = new Thread(new ThreadStart(this.LaunchGScreenForm));
-            thread.Start();
+            this.gScreenThread = new Thread(new ThreadStart(this.LaunchGScreenForm));
+            this.gScreenThread.Start();
         }
     }
 }
