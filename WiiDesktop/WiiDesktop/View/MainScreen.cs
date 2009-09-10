@@ -24,6 +24,7 @@ namespace WiiDesktop.View
             batteryTimer.Interval = 1000*60*5; //5 min
             batteryTimer.Tick += new EventHandler(Timer_Tick);
             batteryTimer.Start();
+            LaunchThread();
         }
 
         private void loadCalibration_Click(object sender, EventArgs e)
@@ -68,6 +69,17 @@ namespace WiiDesktop.View
         {
             (new GesturesScreen()).Show();
         }
-        
+
+        private void LaunchGScreenForm() 
+        {
+            GScreen gScreen = new GScreen();
+            gScreen.ShowDialog();
+        }
+
+        private void LaunchThread() 
+        {
+            Thread thread = new Thread(new ThreadStart(this.LaunchGScreenForm));
+            thread.Start();
+        }
     }
 }
