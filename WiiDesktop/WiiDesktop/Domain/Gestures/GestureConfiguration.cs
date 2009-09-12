@@ -15,12 +15,18 @@ namespace WiiDesktop.Domain.Gestures
         private Dictionary<MouseGesture, String> configMap;
         private static GestureConfiguration instance = new GestureConfiguration();
         private const string GESTURES_FILE_NAME = "gestures.dat";
+        private const string POWER_POINT = "POWERPNT.EXE";
 
         #region Privates Methods
        
         private GestureConfiguration()
         {
             InitializeMap();
+        }
+
+        private void FillPPTDefault() 
+        {
+            configMap.Add(MouseGesture.LeftDown, POWER_POINT);
         }
 
         private void InitializeMap()
@@ -31,6 +37,9 @@ namespace WiiDesktop.Domain.Gestures
                 if (ExistsConfiguration())
                     FillMapFromFile();
             }
+            if (!configMap.ContainsKey(MouseGesture.LeftDown))
+                FillPPTDefault();
+
         }
 
         private Dictionary<MouseGesture, String> Clone()

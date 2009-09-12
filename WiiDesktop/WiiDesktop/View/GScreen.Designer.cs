@@ -49,8 +49,8 @@ namespace WiiDesktop.View
             this.components = new System.ComponentModel.Container();
             this.pbGesture = new System.Windows.Forms.PictureBox();
             this.timerReset = new System.Windows.Forms.Timer(this.components);
-            this.mouseGesturesTest = new MouseGestures.MouseGestures(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.mouseGesturesTest = new MouseGestures.MouseGestures(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pbGesture)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -68,34 +68,33 @@ namespace WiiDesktop.View
             this.timerReset.Interval = 500;
             this.timerReset.Tick += new System.EventHandler(this.timerReset_Tick);
             // 
-            // mouseGesturesTest
-            // 
-            this.mouseGesturesTest.Gesture += new MouseGestures.MouseGestures.GestureHandler(this.mouseGestures_Gesture);
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.pbGesture);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(260, 100);
+            this.groupBox1.Size = new System.Drawing.Size(260, 137);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Area de Gestos";
+            // 
+            // mouseGesturesTest
+            // 
+            this.mouseGesturesTest.Gesture += new MouseGestures.MouseGestures.GestureHandler(this.mouseGestures_Gesture);
             // 
             // GScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 125);
+            this.ClientSize = new System.Drawing.Size(284, 161);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "GScreen";
-            this.Text = "G-Screen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Text = "G-Screen";
             this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
-            //this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GScreen_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.pbGesture)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
