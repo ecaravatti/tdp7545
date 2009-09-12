@@ -69,12 +69,28 @@ namespace WiiDesktop.Domain.Gestures
             }
 
             // Specify file, instructions, and privelegdes
-            FileStream file = new FileStream(Settings.CONFIGURATION_DATA_PATH + GESTURES_FILE_NAME,
-                                             FileMode.OpenOrCreate, FileAccess.Write);
+            try
+            {
+                FileStream file = new FileStream(Settings.CONFIGURATION_DATA_PATH + GESTURES_FILE_NAME,
+                                                 FileMode.Truncate, FileAccess.Write);
+                SaveInFile(file);
+            }
+            catch (FileNotFoundException) 
+            {
+                FileStream file = new FileStream(Settings.CONFIGURATION_DATA_PATH + GESTURES_FILE_NAME,
+                                                 FileMode.CreateNew, FileAccess.Write);
+                SaveInFile(file);
+            } 
+        
+        }
+
+        private void SaveInFile(FileStream file) 
+        {
             StreamWriter sw = new StreamWriter(file);
             foreach (KeyValuePair<MouseGesture, String> item in configMap)
             {
-                sw.WriteLine(item.Key + "=" + item.Value);
+                if (!item.Value.Equals("System Idle Process"))
+                    sw.WriteLine(item.Key + "=" + item.Value);
             }
             sw.Close();
             file.Close();

@@ -17,7 +17,6 @@ namespace WiiDesktop.Domain.Gestures
             ManagementClass managmentClass = new ManagementClass("Win32_process");
             IList<String> applications = new List<String>();
 
-            applications.Add("Seleccione uno...");
             foreach (ManagementObject obj in managmentClass.GetInstances())
             {
                 applications.Add(obj.GetPropertyValue("Caption").ToString());
