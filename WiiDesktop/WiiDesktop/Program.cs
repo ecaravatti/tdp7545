@@ -23,18 +23,16 @@ namespace WiiDesktop
                 try
                 {
                     VirtualDesktop model = new VirtualDesktop();
-                    //model.StartDesktop();
-                    //retry = false;
-                    //Application.EnableVisualStyles();
-                    //Application.SetCompatibleTextRenderingDefault(false);
-                    //Application.Run(new MainScreen(model));
-                    Application.Run(new GesturesScreen());
+                    model.StartDesktop();
+                    retry = false;
+                    Application.EnableVisualStyles();
+                    Application.SetCompatibleTextRenderingDefault(false);
+                    Application.Run(new MainScreen(model));
                 }
                 catch (UserTerminatedException)
                 {
                     DialogResult result = MessageBox.Show(ErrorMessages.WIIMOTE_NOT_FOUND + "\n" + ErrorMessages.PLEASE_CONNECT_WIIMOTE,
                                                           "Wiimote no detectado", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
-
                     retry = result.Equals(DialogResult.Retry);
                 }
             }

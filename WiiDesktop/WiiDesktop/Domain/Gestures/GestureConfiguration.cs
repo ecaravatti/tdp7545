@@ -16,6 +16,7 @@ namespace WiiDesktop.Domain.Gestures
         private static GestureConfiguration instance = new GestureConfiguration();
         private const string GESTURES_FILE_NAME = "gestures.dat";
         private const string POWER_POINT = "POWERPNT.EXE";
+        private const string SYSTEM_IDLE_PROCESS = "System Idle Process";
 
         #region Privates Methods
        
@@ -89,7 +90,7 @@ namespace WiiDesktop.Domain.Gestures
             StreamWriter sw = new StreamWriter(file);
             foreach (KeyValuePair<MouseGesture, String> item in configMap)
             {
-                if (!item.Value.Equals("System Idle Process"))
+                if (!item.Value.Equals(SYSTEM_IDLE_PROCESS))
                     sw.WriteLine(item.Key + "=" + item.Value);
             }
             sw.Close();
@@ -131,7 +132,8 @@ namespace WiiDesktop.Domain.Gestures
         {
             try
             {
-                configMap.Add(gesture, application);
+                if (!application.Equals(SYSTEM_IDLE_PROCESS))
+                    configMap.Add(gesture, application);
             }
             catch (ArgumentException)
             {
