@@ -23,11 +23,12 @@ namespace WiiDesktop
                 try
                 {
                     VirtualDesktop model = new VirtualDesktop();
-                    model.StartDesktop();
-                    retry = false;
-                    Application.EnableVisualStyles();
-                    Application.SetCompatibleTextRenderingDefault(false);
-                    Application.Run(new MainScreen(model));
+                    //model.StartDesktop();
+                    //retry = false;
+                    //Application.EnableVisualStyles();
+                    //Application.SetCompatibleTextRenderingDefault(false);
+                    //Application.Run(new MainScreen(model));
+                    Application.Run(new GesturesScreen());
                 }
                 catch (UserTerminatedException)
                 {

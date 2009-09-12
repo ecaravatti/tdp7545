@@ -16,11 +16,13 @@ namespace WiiDesktop.Domain.Gestures
             Process[] processlist = Process.GetProcesses();
             ManagementClass managmentClass = new ManagementClass("Win32_process");
             IList<String> applications = new List<String>();
-            
+
+            applications.Add("Seleccione uno...");
             foreach (ManagementObject obj in managmentClass.GetInstances())
             {
                 applications.Add(obj.GetPropertyValue("Caption").ToString());
             }
+            applications.Add("POWERPNT.exe");
 
             return applications;
         }
