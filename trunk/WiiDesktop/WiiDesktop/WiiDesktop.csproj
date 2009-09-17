@@ -9,9 +9,10 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WiiDesktop</RootNamespace>
-    <AssemblyName>WiiDesktop</AssemblyName>
+    <AssemblyName>WiiDesk</AssemblyName>
     <StartupObject>
     </StartupObject>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -137,6 +138,7 @@
     <Content Include="Domain\Gestures\MouseGestures.csproj" />
     <Content Include="libs\System.Management.dll" />
     <Content Include="libs\WiimoteLib.dll" />
+    <Content Include="logo.ico" />
     <EmbeddedResource Include="Resources\Images\configIcon.png">
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Images\Down.png" />

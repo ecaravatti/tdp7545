@@ -74,8 +74,7 @@ namespace WiiDesktop.View
 
         private void LaunchGScreenForm() 
         {
-            GScreen gScreen = new GScreen();
-            gScreen.ShowDialog();
+            new GScreen().ShowDialog();
         }
 
         private void LaunchGScreenThread() 
