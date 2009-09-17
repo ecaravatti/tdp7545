@@ -107,7 +107,7 @@ namespace WiiDesktop.View
             this.Controls.Add(this.calibrate);
             this.MaximizeBox = false;
             this.Name = "MainScreen";
-            this.Text = "WiiDesktop";
+            this.Text = "WiiDesk";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainScreen_FormClosing);
             this.wiimoteBattery.ResumeLayout(false);
             this.wiimoteBattery.PerformLayout();
